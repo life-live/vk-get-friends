@@ -148,5 +148,5 @@ class VK:
 
 if __name__ == "__main__":
     while True:
-        url = input("Введи ссылку: ")
+        url = input("Enter the link: ")
         vk = VK(url)
