@@ -2,19 +2,21 @@ import sqlite3
 
 import requests
 
+from config import token
+
 
 class VK:
     def __init__(self, user) -> None:
-        self.token = "TOKEN"
+        self.token = token
         self.version = "5.131"
+        self.accounts = 0
         self.session = requests.Session()
         self.main_user_id = self.get_main_user_id(user)
         self.creating_database()
-
-        self.accounts = 0
+        self.get_friends_info()
 
     def creating_database(self) -> None:
-        with sqlite3.connect(f"database.db") as db:
+        with sqlite3.connect("database.db") as db:
             db.execute(f"""CREATE TABLE IF NOT EXISTS db_{self.main_user_id}(
                         id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
                         user_id BIGINT NOT NULL,
